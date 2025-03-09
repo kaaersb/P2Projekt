@@ -9,8 +9,29 @@ namespace FlyBooking.BLL
 {
     public class FlightResponse
     {
-        public List<Flight> flights {  get; set; }
+        [JsonProperty("best_flights")]
+        public List<FlightGroup> BestFlights { get; set; }
+
+        [JsonProperty("other_flights")]
+        public List<FlightGroup> OtherFlights { get; set; }
     }
+
+    public class FlightGroup
+    {
+        [JsonProperty("flights")]
+        public List<Flight> Flights { get; set; }
+
+        [JsonProperty("total_duration")]
+        public int TotalDuration { get; set; }
+
+        [JsonProperty("price")]
+        public decimal Price { get; set; }
+
+        [JsonProperty("type")]
+        public string Type { get; set; }
+
+    }
+
 
     public class Flight
     {
@@ -46,6 +67,8 @@ namespace FlyBooking.BLL
 
         [JsonProperty("detected_extensions")]
         public DetectedExtensions DetectedExtensions { get; set; }
+
+        public decimal Price { get; set; }
 
     }
     public class AirportInfo

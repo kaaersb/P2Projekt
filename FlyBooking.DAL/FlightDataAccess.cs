@@ -18,6 +18,7 @@ namespace FlyBooking.DAL
             _httpClient = new HttpClient();
         }
 
+
         public async Task<T> GetDataFromApiAsync<T>(string url)
         {
             try

@@ -13,16 +13,78 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using System.Collections.ObjectModel;
+using FlyBooking.BLL;
+using Newtonsoft.Json;
+
 namespace FlyBooking.UI
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly FlightService _flightService;
+
+        // Liste til at binde til UI
+        public ObservableCollection<Flight> Flights { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+            _flightService = new FlightService();
+
+            // Initialiser ObservableCollection
+            Flights = new ObservableCollection<Flight>();
+
+            // Bind collection til ListBox
+            listFlights.ItemsSource = Flights;
         }
+
+        private async void btnGetFlights_Click(object sender, RoutedEventArgs e)
+        {
+            string engine = "google_flights";
+            string flight_type = "round_trip";
+            string departure_id = "JFK";
+            string arrival_id = "MAD";
+            string outbound_date = "2025-03-10";
+            string return_date = "2025-03-17";
+
+            try
+            {
+                var flightData = await _flightService.GetFlightsAsync(engine, flight_type, departure_id, arrival_id, outbound_date, return_date);
+
+                if (flightData == null || (flightData.BestFlights == null && flightData.OtherFlights == null))
+                {
+                    MessageBox.Show("Ingen flydata modtaget.");
+                    return;
+                }
+
+                Flights.Clear();
+
+                // Tilføj fly fra både BestFlights og OtherFlights, og sæt prisen fra FlightGroup
+                foreach (var flightGroup in flightData.BestFlights)
+                {
+                    foreach (var flight in flightGroup.Flights)
+                    {
+                        flight.Price = flightGroup.Price;  // <-- Tilføjer prisen fra FlightGroup til hvert Flight
+                        Flights.Add(flight);
+                    }
+                }
+
+                foreach (var flightGroup in flightData.OtherFlights)
+                {
+                    foreach (var flight in flightGroup.Flights)
+                    {
+                        flight.Price = flightGroup.Price;  // <-- Tilføjer prisen fra FlightGroup til hvert Flight
+                        Flights.Add(flight);
+                    }
+                }
+
+                Console.WriteLine(JsonConvert.SerializeObject(flightData, Formatting.Indented));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fejl ved hentning af flydata: " + ex.Message);
+            }
+        }
+
     }
 }

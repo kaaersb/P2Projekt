@@ -44,8 +44,19 @@ namespace FlyBooking.UI
             string flight_type = "round_trip";
             string departure_id = "JFK";
             string arrival_id = "MAD";
-            string outbound_date = "2025-03-10";
-            string return_date = "2025-03-17";
+            string outbound_date = "";
+            DateTime? selectedDateOutbound = datePickerOutbound.SelectedDate;
+            if (selectedDateOutbound.HasValue)
+            {
+                outbound_date = selectedDateOutbound.Value.ToString("yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+            }
+            string return_date = "";
+            DateTime? selectedDateInbound = datePickerInbound.SelectedDate;
+            if (selectedDateInbound.HasValue)
+            {
+                return_date = selectedDateInbound.Value.ToString("yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+            }
+
 
             try
             {

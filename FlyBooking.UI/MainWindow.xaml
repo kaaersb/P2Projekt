@@ -18,6 +18,10 @@
                     HorizontalAlignment="Center" 
                     Click="btnGetFlights_Click" 
                     Margin="0,0,0,10"/>
+            <Button x:Name="createUser" 
+                    Content="Opret Bruger" 
+                    Click="OpenCreateUserWindow_Click" 
+                    Height="25" FontFamily="Arial" Foreground="#FF0E0C07" Width="70"/>
 
             <TextBlock><Run Text="Udrejse dato"/></TextBlock>
             <DatePicker x:Name ="datePickerOutbound"
@@ -54,10 +58,6 @@
             </ListBox>
 
         </StackPanel>
-        <Button x:Name="createUser" 
-                    Content="Opret Bruger" 
-                    Click="OpenCreateUserWindow_Click" 
-                    Margin="612,56,54,354" Grid.Column="1" Height="25" FontFamily="Arial" Foreground="#FF0E0C07"/>
     </Grid>
 </Window>
 

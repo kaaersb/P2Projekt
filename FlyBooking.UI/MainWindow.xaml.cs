@@ -96,6 +96,13 @@ namespace FlyBooking.UI
                 MessageBox.Show("Fejl ved hentning af flydata: " + ex.Message);
             }
         }
+        // event handler for createUser button
+        private void OpenCreateUserWindow_Click(object sender, RoutedEventArgs e)
+        {
+            CreateUserWindow createUserWindow = new CreateUserWindow();
+            createUserWindow.Owner = this; // Set the main window as the owner of the user creation window
 
+            createUserWindow.ShowDialog(); // Show the user creation window as a dialog
+        }
     }
 }

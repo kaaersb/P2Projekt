@@ -26,9 +26,20 @@ namespace FlyBooking.UI
         // Liste til at binde til UI
         public ObservableCollection<Flight> Flights { get; set; }
 
+        // Eksempel på forslag - tilpas med de relevante lufthavne
+        private List<string> departureSuggestions = new List<string>
+        {
+            "København",
+            "Kastrup Lufthavn/EKCH/CPH",
+            "Aalborg",
+            "Billund"
+        };
+
         public MainWindow()
         {
             InitializeComponent();
+
+            // Initialisere FlightService objekt
             _flightService = new FlightService();
 
             // Initialiser ObservableCollection
@@ -97,5 +108,68 @@ namespace FlyBooking.UI
             }
         }
 
+        /*private void departureAirport_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string departureAirport = sender.ToString();
+            
+        }
+
+        private void arrivalAirport_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string arrivalAirport = sender.ToString();
+        }
+        */
+
+        // Håndterer tekstændringer i afgangs-tekstfeltet
+        private void departureAirport_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string query = departureAirport.Text.Trim().ToLower();
+
+            if (departureAirport == null || listDepartureSuggestions == null)   
+            {
+                // Log eller returner for at undgå fejlen midlertidigt
+                return;
+            }
+
+            // Skjul forslag hvis standardtekst vises eller feltet er tomt
+            if (string.IsNullOrEmpty(query) || query == "fra?")
+            {
+                listDepartureSuggestions.Visibility = Visibility.Collapsed;
+                listDepartureSuggestions.ItemsSource = null;
+                return;
+            }
+
+            // Filtrer forslagene ud fra det indtastede
+            var filtered = departureSuggestions
+                           .Where(s => s.ToLower().Contains(query))
+                           .ToList();
+
+            if (filtered.Any())
+            {
+                listDepartureSuggestions.ItemsSource = filtered;
+                listDepartureSuggestions.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                listDepartureSuggestions.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        // Håndterer når et forslag vælges i ListBox’en
+        private void lstDepartureSuggestions_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (listDepartureSuggestions.SelectedItem != null)
+            {
+                departureAirport.Text = listDepartureSuggestions.SelectedItem.ToString();
+                listDepartureSuggestions.Visibility = Visibility.Collapsed;
+                // Flyt evt. fokus til næste felt
+                arrivalAirport.Focus();
+            }
+        }
+
+        private void arrivalAirport_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Implementer evt. samme logik for destination, hvis nødvendigt
+        }
     }
 }

@@ -23,6 +23,7 @@
                     Click="OpenCreateUserWindow_Click" 
                     Height="25" FontFamily="Arial" Foreground="#FF0E0C07" Width="70"/>
 
+
             <TextBlock><Run Text="Udrejse dato"/></TextBlock>
             <DatePicker x:Name ="datePickerOutbound"
                         HorizontalAlignment="Left"
@@ -32,15 +33,46 @@
                         HorizontalAlignment="Left"
             />
 
+            <Grid Width="500" Height="150">
+                <DatePicker x:Name="datePickerOutbound" HorizontalAlignment="Left" Margin="185,10,0,0" VerticalAlignment="Top"/>
+                <DatePicker x:Name="datePickerInbound" HorizontalAlignment="Left" Margin="386,10,0,0" VerticalAlignment="Top"/>
+                <Label Content="Udrejse dato:" HorizontalAlignment="Left" Margin="98,10,0,0" VerticalAlignment="Top" Height="24" Width="87"/>
+                <Label Content="Hjemrejse dato:" HorizontalAlignment="Left" Margin="294,10,0,0" VerticalAlignment="Top" Height="24" Width="92"/>
+
+                <!-- Tekstfelt til afgangslufthavn -->
+                <TextBox x:Name="departureAirport" 
+                         TextChanged="departureAirport_TextChanged" 
+                         Margin="10,50,351,22" 
+                         Text="Fra?"/>
 
 
-            <!-- ListBox til at vise fly -->
-            <ListBox x:Name="listFlights" Height="300">
+                <!-- Liste til forslag, som vises under tekstfeltet -->
+                <ListBox x:Name="listDepartureSuggestions" 
+                         Margin="10,80,351,0" 
+                         Height="60" 
+                         Visibility="Collapsed"
+                         SelectionChanged="lstDepartureSuggestions_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <!-- Tekstfelt til destination -->
+                <TextBox x:Name="arrivalAirport" 
+                         TextChanged="arrivalAirport_TextChanged" 
+                         Margin="209,50,160,22" 
+                         Text="Til?"/>
+            </Grid>
+
+            <!-- ListBox til at vise flyresultater -->
+            <ListBox Name="listFlights" Height="300">
+
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical" Margin="5">
-                            <TextBlock FontWeight="Bold" FontSize="14" 
-                           Text="{Binding FlightNumber}" />
+                            <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding FlightNumber}" />
                             <TextBlock Text="Fra: " Foreground="Gray"/>
                             <TextBlock Text="{Binding DepartureAirport.Name}" />
                             <TextBlock Text="Til: " Foreground="Gray"/>
@@ -50,15 +82,15 @@
                             <TextBlock Text="Rejseklasse: " Foreground="Gray"/>
                             <TextBlock Text="{Binding TravelClass}" />
                             <TextBlock FontWeight="Bold" FontSize="14" Foreground="DarkGreen"
-                           Text="{Binding Price, StringFormat=Pris: \{0:C\}}"/>
+
+                                       Text="{Binding Price, StringFormat='Pris: {0:C}'}"/>
+
                             <Separator />
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-
+            <Label Content="Label"/>
         </StackPanel>
     </Grid>
 </Window>
-
-

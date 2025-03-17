@@ -107,6 +107,12 @@ namespace FlyBooking.UI
                 MessageBox.Show("Fejl ved hentning af flydata: " + ex.Message);
             }
         }
+        // event handler for createUser button
+        private void OpenCreateUserWindow_Click(object sender, RoutedEventArgs e)
+        {
+            CreateUserWindow createUserWindow = new CreateUserWindow();
+            createUserWindow.Owner = this; // Set the main window as the owner of the user creation window
+
 
         /*private void departureAirport_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -170,6 +176,9 @@ namespace FlyBooking.UI
         private void arrivalAirport_TextChanged(object sender, TextChangedEventArgs e)
         {
             // Implementer evt. samme logik for destination, hvis nødvendigt
+
+            createUserWindow.ShowDialog(); // Show the user creation window as a dialog
+
         }
     }
 }

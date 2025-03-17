@@ -26,6 +26,8 @@ namespace FlyBooking.UI
         // Liste til at binde til UI
         public ObservableCollection<Flight> Flights { get; set; }
 
+        CreateUserWindow createUserWindow = new CreateUserWindow();
+
         // Eksempel på forslag - tilpas med de relevante lufthavne
         private List<string> departureSuggestions = new List<string>
         {
@@ -112,7 +114,8 @@ namespace FlyBooking.UI
         {
             CreateUserWindow createUserWindow = new CreateUserWindow();
             createUserWindow.Owner = this; // Set the main window as the owner of the user creation window
-
+            createUserWindow.ShowDialog(); // Show the user creation window as a dialog
+        }
 
         /*private void departureAirport_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -177,7 +180,6 @@ namespace FlyBooking.UI
         {
             // Implementer evt. samme logik for destination, hvis nødvendigt
 
-            createUserWindow.ShowDialog(); // Show the user creation window as a dialog
 
         }
     }

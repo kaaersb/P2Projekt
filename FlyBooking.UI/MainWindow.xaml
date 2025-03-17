@@ -19,7 +19,7 @@
                     Click="btnGetFlights_Click" 
                     Margin="0,0,0,10"/>
 
-            <Grid Width="773" Height="150">
+            <Grid Width="500" Height="150">
                 <DatePicker x:Name="datePickerOutbound" HorizontalAlignment="Left" Margin="185,10,0,0" VerticalAlignment="Top"/>
                 <DatePicker x:Name="datePickerInbound" HorizontalAlignment="Left" Margin="386,10,0,0" VerticalAlignment="Top"/>
                 <Label Content="Udrejse dato:" HorizontalAlignment="Left" Margin="372,50,0,0" VerticalAlignment="Top" Height="25" Width="87"/>

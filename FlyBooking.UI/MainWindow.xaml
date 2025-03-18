@@ -23,26 +23,19 @@
                     Click="OpenCreateUserWindow_Click" 
                     Height="25" FontFamily="Arial" Foreground="#FF0E0C07" Width="70"/>
 
-
-            <TextBlock><Run Text="Udrejse dato"/></TextBlock>
-            <DatePicker x:Name ="datePickerOutbound"
-                        HorizontalAlignment="Left"
-            />
-            <TextBlock><Run Text="Hjemrejse dato"/></TextBlock>
-            <DatePicker x:Name ="datePickerInbound"
-                        HorizontalAlignment="Left"
-            />
-
             <Grid Width="500" Height="150">
                 <DatePicker x:Name="datePickerOutbound" HorizontalAlignment="Left" Margin="185,10,0,0" VerticalAlignment="Top"/>
                 <DatePicker x:Name="datePickerInbound" HorizontalAlignment="Left" Margin="386,10,0,0" VerticalAlignment="Top"/>
-                <Label Content="Udrejse dato:" HorizontalAlignment="Left" Margin="98,10,0,0" VerticalAlignment="Top" Height="24" Width="87"/>
+                <Label Content="Udrejse dato:" HorizontalAlignment="Left" Margin="372,50,0,0" VerticalAlignment="Top" Height="25" Width="87"/>
                 <Label Content="Hjemrejse dato:" HorizontalAlignment="Left" Margin="294,10,0,0" VerticalAlignment="Top" Height="24" Width="92"/>
 
                 <!-- Tekstfelt til afgangslufthavn -->
                 <TextBox x:Name="departureAirport" 
                          TextChanged="departureAirport_TextChanged" 
-                         Margin="10,50,351,22" 
+                         HorizontalAlignment="Left"
+                         Margin="10,0,0,0"
+                         Width="100"
+                         Height="25"
                          Text="Fra?"/>
 
 
@@ -62,7 +55,10 @@
                 <!-- Tekstfelt til destination -->
                 <TextBox x:Name="arrivalAirport" 
                          TextChanged="arrivalAirport_TextChanged" 
-                         Margin="209,50,160,22" 
+                         HorizontalAlignment="Left"
+                         Margin="110,0,0,0" 
+                         Width="100"
+                         Height="25"
                          Text="Til?"/>
             </Grid>
 

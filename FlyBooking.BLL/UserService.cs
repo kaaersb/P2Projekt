@@ -10,7 +10,8 @@ namespace FlyBooking.BLL
     public class UserService
     {
         private UserRepository userRepository = new UserRepository(); // DAL
-
+        // note to future self: Add a function that checks if a username already exist in the database.
+        // For use in the SaveUser function
         public bool SaveUser(string username, string password)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))

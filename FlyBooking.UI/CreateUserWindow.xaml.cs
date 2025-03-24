@@ -55,6 +55,7 @@ namespace FlyBooking.UI
             if (result)
             {
                 MessageBox.Show("User saved successfully!");
+                this.Close();
             }
             else
             {

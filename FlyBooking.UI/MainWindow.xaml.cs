@@ -55,14 +55,25 @@ namespace FlyBooking.UI
         {
             string engine = "google_flights";
             string flight_type = "round_trip";
-            string departure_id = "JFK";
-            string arrival_id = "MAD";
+
+            string departure_id = "";
+            departure_id = departureAirport.Text.ToUpper().Trim();
+
+            string arrival_id = "";
+            arrival_id = arrivalAirport.Text.ToUpper().Trim();
+
+            if (string.IsNullOrEmpty(departure_id) || string.IsNullOrEmpty(arrival_id))
+            {
+                return;
+            }
+
             string outbound_date = "";
             DateTime? selectedDateOutbound = datePickerOutbound.SelectedDate;
             if (selectedDateOutbound.HasValue)
             {
                 outbound_date = selectedDateOutbound.Value.ToString("yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
             }
+
             string return_date = "";
             DateTime? selectedDateInbound = datePickerInbound.SelectedDate;
             if (selectedDateInbound.HasValue)

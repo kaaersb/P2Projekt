@@ -25,6 +25,7 @@ namespace FlyBooking.UI
             InitializeComponent();
         }
 
+        private void LoginButton_Click(object )
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 

@@ -59,6 +59,7 @@
                        HorizontalAlignment="Right"/>
             <Button x:Name="LoginBtn" 
                     Content="Login" 
+                    Click="LoginButton_Click"
                     Foreground="White"
                     Background="Black"
                     Margin="0,25"

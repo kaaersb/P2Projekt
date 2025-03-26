@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,12 +24,9 @@ namespace FlyBooking.UI
         {
             InitializeComponent();
         }
-        /*
-        private void LoginButton_Click(object sender)
-        {
-            Console.WriteLine("Hello");
-        }
-        */
+
+        //private void LoginButton_Click(object sender, )
+        // denne Click funktion skal kalde en funktion i enten BLL eller MainWindow.xaml.cs som lukker/hider usercontrol
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 

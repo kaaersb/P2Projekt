@@ -29,6 +29,17 @@
                     Content="Opret Bruger" 
                     Click="OpenCreateUserWindow_Click" 
                     FontFamily="Arial" Foreground="#FF0E0C07" />
+            <ListBox x:Name="listDepartureSuggestions" 
+             Visibility="Collapsed"
+             MaxHeight="150"
+             SelectionChanged="ListDepartureSuggestions_SelectionChanged"
+             Background="White">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </StackPanel>
 
         <!-- Border der omringer søge felterne -->

@@ -176,7 +176,7 @@ namespace FlyBooking.UI
         }
 
         // Håndterer når et forslag vælges i ListBox’en
-        private void lstDepartureSuggestions_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ListDepartureSuggestions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (listDepartureSuggestions.SelectedItem != null)
             {

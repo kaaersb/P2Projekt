@@ -6,7 +6,8 @@
         mc:Ignorable="av" 
         x:Class="FlyBooking.UI.MainWindow"
         Title="Flight Booking" Height="750" Width="1000">
-    <Grid ShowGridLines="True">
+    
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="4*"/>
@@ -18,18 +19,35 @@
             <RowDefinition Height="2*" />
             <RowDefinition Height="0.5*" />
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
-            <!-- Knap til at hente flydata -->
-            <Button x:Name="btnGetFlights" 
-                    Content="Hent Fly" 
-                    HorizontalAlignment="Center" 
-                    Click="btnGetFlights_Click" 
-                   />
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2">
+            <Button x:Name="login"
+                    Content="Log in"
+                    FontFamily="Arial" Foreground="#FF0E0C07"
+                    Height="30"
+                    Width="50"
+                    Margin="10,10,10,10"
+                    />
             <Button x:Name="createUser" 
                     Content="Opret Bruger" 
                     Click="OpenCreateUserWindow_Click" 
-                    FontFamily="Arial" Foreground="#FF0E0C07" />
+                    FontFamily="Arial" Foreground="#FF0E0C07"
+                    Height="30"
+                    Width="75"/>
+
         </StackPanel>
+
+        <!-- Knap til at hente flydata -->
+        <Button x:Name="btnGetFlights" 
+                Content="Hent Fly" 
+                HorizontalAlignment="Center" 
+                Click="btnGetFlights_Click"
+                Grid.Row="1"
+                Grid.Column="1"
+                Height="30"
+                Width="50"
+                VerticalAlignment="Bottom"
+                   />
 
         <!-- Border der omringer søge felterne -->
         <Border BorderThickness="1" 
@@ -38,6 +56,8 @@
                 HorizontalAlignment="Center"
                 Grid.Column="1"
                 Grid.Row="1"
+                Height="100"
+                Width="650"
                 >
             <!-- Samlende StackPanel til søge felterne -->
             <StackPanel Orientation="Horizontal"
@@ -49,7 +69,6 @@
 
                     <!-- TextBox til afrejse -->
                     <TextBox x:Name="departureAirport"
-                             TextChanged="departureAirport_TextChanged"
                              Width="100"
                              Height="30"
                              Text="Fra?" Background="White" TextWrapping="Wrap"
@@ -57,7 +76,6 @@
                     
                     <!-- Textbox til destination -->
                     <TextBox x:Name="arrivalAirport" 
-                             TextChanged="arrivalAirport_TextChanged" 
                              HorizontalAlignment="Left" 
                              Width="100"
                              Height="30"
@@ -85,27 +103,36 @@
             </StackPanel>
         </Border>
 
-        <!-- ListBox til at vise flyresultater -->
-        <ListBox Name="listFlights" Height="300"
+        <ListBox ItemsSource="{Binding FlightGroups}"
                  Grid.Row="2"
-                 Grid.Column="1">
-
+                 Grid.Column="1"
+                 Margin="0,50,0,0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Vertical" Margin="5">
-                        <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding FlightNumber}" />
-                        <TextBlock Text="Fra: " Foreground="Gray"/>
-                        <TextBlock Text="{Binding DepartureAirport.Name}" />
-                        <TextBlock Text="Til: " Foreground="Gray"/>
-                        <TextBlock Text="{Binding ArrivalAirport.Name}" />
-                        <TextBlock Text="Fly: " Foreground="Gray"/>
-                        <TextBlock Text="{Binding Airline}" />
-                        <TextBlock Text="Rejseklasse: " Foreground="Gray"/>
-                        <TextBlock Text="{Binding TravelClass}" />
+                    <StackPanel Margin="5">
+                        <!-- Eksempel på overskrift, evt. med et ikon hvis der er forbindelser -->
+                        <TextBlock Text="Booking:" FontWeight="Bold" FontSize="14" />
+                        <!-- Liste over flysegmenter for denne booking -->
+                        <ItemsControl ItemsSource="{Binding Flights}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical" Margin="2">
+                                        <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding FlightNumber}" />
+                                        <TextBlock Text="Fra: " Foreground="Gray"/>
+                                        <TextBlock Text="{Binding DepartureAirport.Name}" />
+                                        <TextBlock Text="Til: " Foreground="Gray"/>
+                                        <TextBlock Text="{Binding ArrivalAirport.Name}" />
+                                        <TextBlock Text="Fly: " Foreground="Gray"/>
+                                        <TextBlock Text="{Binding Airline}" />
+                                        <TextBlock Text="Rejseklasse: " Foreground="Gray"/>
+                                        <TextBlock Text="{Binding TravelClass}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <!-- Vis den samlede pris for bookingen -->
                         <TextBlock FontWeight="Bold" FontSize="14" Foreground="DarkGreen"
-
                            Text="{Binding Price, StringFormat='Pris: {0:C}'}"/>
-
                         <Separator />
                     </StackPanel>
                 </DataTemplate>

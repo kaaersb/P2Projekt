@@ -116,15 +116,15 @@
                         <ItemsControl ItemsSource="{Binding Flights}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Vertical" Margin="2">
+                                    <StackPanel Orientation="Horizontal" Margin="2">
                                         <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding FlightNumber}" />
-                                        <TextBlock Text="Fra: " Foreground="Gray"/>
+                                        <TextBlock Text=" Fra: " Foreground="Gray"/>
                                         <TextBlock Text="{Binding DepartureAirport.Name}" />
-                                        <TextBlock Text="Til: " Foreground="Gray"/>
+                                        <TextBlock Text=" Til: " Foreground="Gray"/>
                                         <TextBlock Text="{Binding ArrivalAirport.Name}" />
-                                        <TextBlock Text="Fly: " Foreground="Gray"/>
+                                        <TextBlock Text=" Fly: " Foreground="Gray"/>
                                         <TextBlock Text="{Binding Airline}" />
-                                        <TextBlock Text="Rejseklasse: " Foreground="Gray"/>
+                                        <TextBlock Text=" Rejseklasse: " Foreground="Gray"/>
                                         <TextBlock Text="{Binding TravelClass}" />
                                     </StackPanel>
                                 </DataTemplate>

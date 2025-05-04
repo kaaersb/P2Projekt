@@ -23,5 +23,12 @@ namespace FlyBooking.UI
         {
             InitializeComponent();
         }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+
     }
 }

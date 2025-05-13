@@ -93,7 +93,60 @@ namespace FlyBooking.DAL
                 }
             }
         }
+        //User.Add(id, navn, e-mail, password)
+        public bool Add(string id, string name, string email, string password)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "INSERT INTO testuserdb.users (user_id, user_name, user_email, user_password) VALUES (@Id, @Name, @Email, @Password)";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+                    command.Parameters.AddWithValue("@Name", name);
+                    command.Parameters.AddWithValue("@Email", email);
+                    command.Parameters.AddWithValue("@Password", password);
+                    int rowsAffected = command.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+        }
 
+        public (bool, string) ValidateUser2(string email, string password)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "SELECT user_password FROM testuserdb.users WHERE user_email = @Email";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Email", email);
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            string storedPassword = reader["user_password"].ToString();
+
+                            if (password == storedPassword)
+                            {
+                                return (true, "Login successfull!");
+                            }
+                            else
+                            {
+                                return (false, "Invalid password.");
+                            }
+                        }
+                        else
+                        {
+                            return (false, "User not found.");
+                        }
+                        // Note to future marcus: if you want to move the logic to the BLL make it so the function
+                        // returns a boolean and a string(storedPassword). If the bool is false that means
+                        // the user was not found
+                    }
+                }
+            }
+        }
 
     }
 }

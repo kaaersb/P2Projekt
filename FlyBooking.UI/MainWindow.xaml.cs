@@ -122,5 +122,12 @@ namespace FlyBooking.UI
             createUserWindow.Owner = this; // Set the main window as the owner of the user creation window
             createUserWindow.ShowDialog(); // Show the user creation window as a dialog
         }
+
+        private void OpenLoginViewWindow_Click(object sender, RoutedEventArgs e)
+        {
+            LoginView loginWindow = new LoginView();
+            loginWindow.Owner = this;
+            loginWindow.ShowDialog();
+        }
     }
 }

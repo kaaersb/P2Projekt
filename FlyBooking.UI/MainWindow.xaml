@@ -23,6 +23,7 @@
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2">
             <Button x:Name="login"
                     Content="Log in"
+                    Click="OpenLoginViewWindow_Click"
                     FontFamily="Arial" Foreground="#FF0E0C07"
                     Height="30"
                     Width="50"
